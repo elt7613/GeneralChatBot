@@ -6,6 +6,7 @@ from prompts.companion import companion_prompt
 from states.system_state import SystemState
 from pydantic_ai.usage import UsageLimits
 from .history import CompanionAgentHistory
+from typing import Dict, Any
 
 class OutputModel(BaseModel):
     response: str = Field(..., description="The response from the agent")
@@ -22,9 +23,27 @@ agent = Agent(
 )
 
 
-async def companion_agent(state: SystemState):
+async def companion_agent(state: SystemState) -> Dict[str,Any]:
     """
-
+    Companion agent that provides personalized emotional support and companionship to users.
+    
+    This agent creates a personalized companion experience based on user-specified companion
+    characteristics (name, gender) and maintains conversation history to build rapport and
+    provide consistent emotional support throughout the interaction.
+    
+    Args:
+        state (SystemState): The current system state containing:
+            - workflow_id: Unique identifier for the conversation session
+            - user_input: Dictionary containing:
+                - response: The user's message/response
+                - companion_name: Name of the companion (e.g., "Emma", "Alex")
+                - companion_gender: Gender of the companion ("male", "female", etc.)
+                - file: Optional file attachment (currently unused)
+    
+    Returns:
+        dict: Dictionary containing:
+            - agent_response: The companion's response to the user
+            - previous_agent: The name of this agent for state tracking
     """
     # Conversation history
     history = await CompanionAgentHistory.load_or_create(state.get("workflow_id"))

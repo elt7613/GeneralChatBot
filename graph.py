@@ -44,6 +44,9 @@ graph.add_edge("conversation_analyzer_agent", END)
 
 DB_URI = os.environ.get("MONGO_CONNECTION_URL")
 
-#Compile and return the workflow graph
-with MongoDBSaver.from_conn_string(DB_URI) as checkpointer:
-    graph.compile(checkpointer=checkpointer)
+# Compiling the workflow graph
+def create_graph():
+    checkpointer = MongoDBSaver.from_conn_string(DB_URI)
+    return graph.compile(checkpointer=checkpointer)
+
+compiled_graph = create_graph()

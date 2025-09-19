@@ -2,7 +2,7 @@ from langgraph.graph import END
 from pydantic_ai import Agent
 from config.llm import conversation_analyzer_llm
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List,Dict,Any
 from states.system_state import SystemState
 from pydantic_ai.usage import UsageLimits
 from .history import GeneralAgentHistory,CompanionAgentHistory
@@ -64,6 +64,19 @@ agent = Agent(
 # Getting the different agnet histories dynamically
 async def get_conversation_history(agent_name: str):
     """
+    Retrieves the appropriate conversation history class based on the agent name.
+    
+    This function maps agent names to their corresponding history management classes,
+    allowing the conversation analyzer to access the correct conversation history
+    for analysis regardless of which agent was previously active.
+    
+    Args:
+        agent_name (str): The name of the agent whose history is needed.
+                         Must be one of: "general_agent", "companion_agent"
+    
+    Returns:
+        Type[Union[GeneralAgentHistory, CompanionAgentHistory]]: The history class
+        corresponding to the specified agent name.
     """
     histories = {
         "general_agent": GeneralAgentHistory,
@@ -73,8 +86,22 @@ async def get_conversation_history(agent_name: str):
     return histories[agent_name]
 
 # Conversation Analyzer agent 
-async def conversation_analyzer_agent(state: SystemState):
+async def conversation_analyzer_agent(state: SystemState) -> Dict[str,Any]:
     """
+    Analyzes completed conversations to provide comprehensive insights and recommendations.
+    
+    This agent performs deep analysis of conversation sessions between users and other agents
+    (general_agent or companion_agent), generating detailed psychological, emotional, and
+    behavioral insights. The analysis includes intent fulfillment, emotional journey,
+    relationship dynamics, and actionable recommendations for improvement.
+    
+    Args:
+        state (SystemState): The current system state containing:
+            - previous_agent: The name of the agent whose conversation to analyze
+            - workflow_id: Unique identifier for the conversation session
+    
+    Returns:
+        dict: Empty dictionary (analysis results are saved to file)
     """
     # Conversation history
     agent_history = await get_conversation_history(state.get("previous_agent"))
