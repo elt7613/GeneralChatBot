@@ -3,6 +3,7 @@ import logging
 from typing import Any, Dict, List
 from .history_key_mapping import get_message_key
 from ..config import get_redis_client, MESSAGE_EXPIRY_SECONDS
+from ..session_registry import SessionRegistry
 
 logger = logging.getLogger(__name__)
 
@@ -10,15 +11,17 @@ logger = logging.getLogger(__name__)
 async def save_messages_to_redis(
     workflow_id: str, 
     agent_type: str, 
-    messages: Any
+    messages: Any,
+    user_id: str = None
 ) -> bool:
     """
-    Saves messages to Redis with expiration time.
+    Saves messages to Redis with expiration time and registers session for automatic analysis.
     
     Args:
         workflow_id: The unique identifier for the workflow
-        agent_type: The type of agent (e.g., 'worker_agent', 'sub_agent')
+        agent_type: The type of agent (e.g., 'general_agent', 'companion_agent')
         messages: List of message dictionaries to store
+        user_id: The unique identifier for the user (optional, for session registration)
         
     Returns:
         bool: True if messages were saved successfully, False otherwise
@@ -46,6 +49,20 @@ async def save_messages_to_redis(
             MESSAGE_EXPIRY_SECONDS,
             messages_json
         )
+        
+        # Register session for automatic conversation analysis if user_id is provided
+        # and agent_type is not conversation_analyzer_agent (to avoid circular registration)
+        if result and user_id and agent_type != "conversation_analyzer_agent":
+            try:
+                await SessionRegistry.register_session(
+                    user_id=user_id,
+                    workflow_id=workflow_id,
+                    agent_name=agent_type
+                )
+            except Exception as e:
+                logger.warning(f"Failed to register session {workflow_id} for automatic analysis: {str(e)}")
+                # Don't fail the save operation if session registration fails
+        
         return result  # Redis returns True if successful
     except json.JSONDecodeError as e:
         logger.error(f"JSON serialization error for workflow {workflow_id}: {str(e)}")

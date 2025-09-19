@@ -44,7 +44,7 @@ async def general_agent(state: SystemState):
         "user": user_input,
         "assistant": result.output.response
     })
-    await history.save(state.get("workflow_id"))
+    await history.save(workflow_id=state.get("workflow_id"), user_id=state.get("user_id"))
 
     return {
         "agent_response": result.output.response,

@@ -65,12 +65,13 @@ class BaseAgentHistory(BaseModel):
             # Return empty instance on error to allow operation to continue
             return cls()
     
-    async def save(self, workflow_id: str) -> bool:
+    async def save(self, workflow_id: str, user_id: str = None) -> bool:
         """
-        Save messages to Redis with automatic expiration.
+        Save messages to Redis with automatic expiration and session registration.
         
         Args:
             workflow_id: The unique identifier for the workflow
+            user_id: The unique identifier for the user (optional, for session registration)
             
         Returns:
             bool: True if messages were saved successfully, False otherwise
@@ -96,7 +97,7 @@ class BaseAgentHistory(BaseModel):
             
             # Save to Redis (with expiry automatically set)
             logger.debug(f"Saving {len(serializable_messages)} messages for {self.__class__.__name__}, workflow: {workflow_id}")
-            result = await save_messages_to_redis(workflow_id, self.__class__.agent_type, serializable_messages)
+            result = await save_messages_to_redis(workflow_id, self.__class__.agent_type, serializable_messages, user_id)
             
             if result:
                 logger.debug(f"Successfully saved {self.__class__.__name__} for workflow: {workflow_id}")

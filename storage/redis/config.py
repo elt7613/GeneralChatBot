@@ -8,7 +8,11 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 REDIS_URL = os.environ.get("REDIS_URL")
-MESSAGE_EXPIRY_SECONDS = int(os.environ.get("MESSAGE_EXPIRY_SECONDS", "3600"))
+MESSAGE_EXPIRY_SECONDS = int(os.environ.get("MESSAGE_EXPIRY_SECONDS"))
+
+# Automatic Conversation Analyzer Trigger Settings
+TRIGGER_OFFSET_MINUTES = int(os.environ.get("TRIGGER_OFFSET_MINUTES"))
+SCHEDULER_INTERVAL_SECONDS = int(os.environ.get("SCHEDULER_INTERVAL_SECONDS"))
 
 # Global redis client
 redis_client = None

@@ -1,3 +1,4 @@
 .env
 conversation_analyzed
 .langgraph_api
+scheduler_daemon.log

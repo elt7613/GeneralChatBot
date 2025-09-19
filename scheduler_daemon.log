@@ -1,0 +1,38 @@
+2025-09-19 22:17:27,313 [INFO] __main__: 🚀 Starting Conversation Analyzer Scheduler Daemon...
+2025-09-19 22:17:27,314 [INFO] __main__: Process ID: 82175
+2025-09-19 22:17:27,314 [INFO] __main__: Started at: 2025-09-19 22:17:27.314224
+2025-09-19 22:17:27,314 [INFO] scheduler_service: Starting Conversation Analyzer Scheduler Service...
+2025-09-19 22:17:27,318 [INFO] storage.redis.scheduler.trigger_service: TriggerService: LangGraph initialized successfully - Type: <class 'langgraph.graph.state.CompiledStateGraph'>
+2025-09-19 22:17:27,318 [INFO] storage.redis.scheduler.conversation_scheduler: ConversationScheduler initialized
+2025-09-19 22:17:27,318 [INFO] storage.redis.scheduler.conversation_scheduler: Starting ConversationScheduler...
+2025-09-19 22:17:27,319 [INFO] apscheduler.scheduler: Scheduler started
+2025-09-19 22:17:27,321 [INFO] apscheduler.scheduler: Added job "Check Expiring Sessions" to job store "default"
+2025-09-19 22:17:27,321 [INFO] storage.redis.scheduler.conversation_scheduler: ConversationScheduler started successfully
+2025-09-19 22:17:27,321 [INFO] storage.redis.scheduler.conversation_scheduler: Job scheduled to run every 60 seconds
+2025-09-19 22:17:27,321 [INFO] scheduler_service: ✅ Conversation Analyzer Scheduler Service started successfully
+2025-09-19 22:17:27,322 [INFO] scheduler_service: 🔍 Automatic conversation analysis enabled - sessions will be analyzed 5 minutes before Redis expiry
+2025-09-19 22:17:27,322 [INFO] __main__: ✅ Scheduler daemon started successfully
+2025-09-19 22:17:31,200 [INFO] __main__: Received signal 15, shutting down...
+2025-09-19 22:17:57,348 [INFO] __main__: 🛑 Stopping Conversation Analyzer Scheduler Daemon...
+2025-09-19 22:17:57,348 [INFO] scheduler_service: Stopping Conversation Analyzer Scheduler Service...
+2025-09-19 22:17:57,349 [INFO] storage.redis.scheduler.conversation_scheduler: ConversationScheduler stopped
+2025-09-19 22:17:57,349 [INFO] scheduler_service: ✅ Conversation Analyzer Scheduler Service stopped successfully
+2025-09-19 22:17:57,349 [INFO] __main__: ✅ Scheduler stopped gracefully
+2025-09-19 22:17:57,349 [INFO] apscheduler.scheduler: Scheduler has been shut down
+2025-09-19 22:17:57,349 [INFO] storage.redis.scheduler.conversation_scheduler: ConversationScheduler initialized
+2025-09-19 22:17:57,349 [WARNING] __main__: ⚠️ Scheduler stopped, restarting...
+2025-09-19 22:17:57,350 [INFO] scheduler_service: Starting Conversation Analyzer Scheduler Service...
+2025-09-19 22:17:57,354 [INFO] storage.redis.scheduler.trigger_service: TriggerService: LangGraph initialized successfully - Type: <class 'langgraph.graph.state.CompiledStateGraph'>
+2025-09-19 22:17:57,354 [INFO] storage.redis.scheduler.conversation_scheduler: Starting ConversationScheduler...
+2025-09-19 22:17:57,354 [INFO] apscheduler.scheduler: Scheduler started
+2025-09-19 22:17:57,355 [INFO] apscheduler.scheduler: Added job "Check Expiring Sessions" to job store "default"
+2025-09-19 22:17:57,355 [INFO] storage.redis.scheduler.conversation_scheduler: ConversationScheduler started successfully
+2025-09-19 22:17:57,355 [INFO] storage.redis.scheduler.conversation_scheduler: Job scheduled to run every 60 seconds
+2025-09-19 22:17:57,355 [INFO] scheduler_service: ✅ Conversation Analyzer Scheduler Service started successfully
+2025-09-19 22:17:57,355 [INFO] scheduler_service: 🔍 Automatic conversation analysis enabled - sessions will be analyzed 5 minutes before Redis expiry
+2025-09-19 22:17:57,355 [INFO] __main__: 🛑 Stopping Conversation Analyzer Scheduler Daemon...
+2025-09-19 22:17:57,355 [INFO] scheduler_service: Stopping Conversation Analyzer Scheduler Service...
+2025-09-19 22:17:57,355 [INFO] storage.redis.scheduler.conversation_scheduler: ConversationScheduler stopped
+2025-09-19 22:17:57,355 [INFO] scheduler_service: ✅ Conversation Analyzer Scheduler Service stopped successfully
+2025-09-19 22:17:57,355 [INFO] __main__: ✅ Scheduler stopped gracefully
+2025-09-19 22:17:57,356 [INFO] apscheduler.scheduler: Scheduler has been shut down

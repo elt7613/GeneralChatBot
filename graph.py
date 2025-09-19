@@ -4,7 +4,7 @@ from states.system_state import SystemState
 from agent.companion import companion_agent
 from agent.conversation_analyzer import conversation_analyzer_agent
 from agent.general import general_agent
-
+from scheduler_service import start_conversation_scheduler, stop_conversation_scheduler
 
 import os
 from dotenv import load_dotenv
@@ -49,4 +49,9 @@ def create_graph():
     checkpointer = MongoDBSaver.from_conn_string(DB_URI)
     return graph.compile(checkpointer=checkpointer)
 
+# Scheduler-specific graph without checkpointer (for background processing)
+def create_scheduler_graph():
+    return graph.compile()
+
+# Compiled graph for langgraph dev
 compiled_graph = create_graph()
