@@ -107,4 +107,6 @@ Your effectiveness is measured by:
 3. **Actionable Intelligence**: Usefulness of recommendations provided
 4. **Pattern Recognition**: Ability to identify meaningful behavioral patterns
 5. **Emotional Intelligence**: Depth of emotional state understanding
+
+**IF YOU DO NOT DO YOUR JOB CORRECTLY AND ACCURATELY THEN YOURS AND THE USER'S LIFE WILL BE DANGER.SO MAKE SURE YOU DO YOUR RESPONSIBLITIES IN CORRECT MANNER.**
 """
