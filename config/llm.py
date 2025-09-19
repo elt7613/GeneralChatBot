@@ -11,3 +11,13 @@ general_llm = OpenAIChatModel(
     'google/gemini-2.5-flash-lite',
     provider=OpenRouterProvider(api_key=OPENROUTER_API_KEY),
 )
+
+companion_llm = OpenAIChatModel(
+    'openai/gpt-4o-mini',
+    provider=OpenRouterProvider(api_key=OPENROUTER_API_KEY),
+)
+
+conversation_analyzer_llm = OpenAIChatModel(
+    'openai/gpt-4o-mini',
+    provider=OpenRouterProvider(api_key=OPENROUTER_API_KEY),
+)
