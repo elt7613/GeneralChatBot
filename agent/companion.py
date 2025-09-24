@@ -7,6 +7,8 @@ from states.system_state import SystemState
 from pydantic_ai.usage import UsageLimits
 from .history import CompanionAgentHistory
 from typing import Dict, Any
+from utils.file_input import file_to_prompt_parts
+import logging
 
 class OutputModel(BaseModel):
     response: str = Field(..., description="The response from the agent")
@@ -64,10 +66,24 @@ async def companion_agent(state: SystemState) -> Dict[str,Any]:
         - companion_gender: {companion_gender}
     """
 
+    # Build prompt parts with optional file attachment
+    parts = await file_to_prompt_parts(composed_input, file)
+    try:
+        has_attachment = any(not isinstance(p, str) for p in parts)
+        attachment_types = [type(p).__name__ for p in parts if not isinstance(p, str)]
+        logging.info(
+            "companion_agent: built prompt parts; has_attachment=%s types=%s",
+            has_attachment,
+            attachment_types,
+        )
+    except Exception:
+        # Never fail because of logging
+        pass
+
     try:
         # Use async version of the agent
         result = await agent.run(
-            composed_input,
+            parts,
             usage_limits=UsageLimits(request_limit=None)
         )
     except Exception as e:

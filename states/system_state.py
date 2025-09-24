@@ -8,11 +8,9 @@ class SystemState(TypedDict):
     user_id: str
     workflow_id: str
 
-    agent_name: Literal["general_agent", "companion_agent", "conversation_analyzer_agent"]
+    agent_name: Literal["companion_agent", "conversation_analyzer_agent"]
 
     previous_agent: Optional[str]
 
     user_input: Optional[UnserInput]
     agent_response: Optional[str]
-    
-    
